@@ -26,15 +26,18 @@
   },
   "homepage": "https://github.com/travi/hapi-html-request-router#readme",
   "devDependencies": {
+    "@travi/any": "0.7.0",
     "@travi/eslint-config-travi": "0.3.0",
     "babel-cli": "6.18.0",
     "babel-preset-es2015-node": "6.1.1",
+    "babel-preset-stage-2": "6.18.0",
     "chai": "3.5.0",
     "cz-conventional-changelog": "1.2.0",
     "eslint": "3.10.0",
     "husky": "0.11.9",
     "mocha": "3.1.2",
     "npm-run-all": "3.1.1",
+    "proxyquire": "1.7.10",
     "sinon": "1.17.6",
     "validate-commit-msg": "2.8.2"
   },
@@ -42,5 +45,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "negotiator": "0.6.1"
   }
 }

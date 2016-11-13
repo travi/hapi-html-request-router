@@ -1,24 +1,63 @@
 import {assert} from 'chai';
 import sinon from 'sinon';
-import {register} from '../../src/plugin';
+import proxyquire from 'proxyquire';
+import any from '@travi/any';
 
 suite('plugin', () => {
-    suite('plugin', () => {
-        test('that the plugin is defined', () => {
-            assert.deepEqual(register.attributes, {
-                name: 'html-request-router'
-            });
+    let sandbox, mediaType, request;
+
+    const
+        Negotiator = sinon.stub(),
+        router = proxyquire('../../src/plugin', {
+            'negotiator': Negotiator
         });
 
-        test('that the request for html is handled', () => {
-            const
-                next = sinon.spy(),
-                server = {ext: sinon.spy()};
+    setup(() => {
+        sandbox = sinon.sandbox.create();
 
-            register(server, null, next);
+        mediaType = sinon.stub();
+        request = {...any.simpleObject(), url: {path: any.url()}, setUrl: sinon.spy()};
+        Negotiator.withArgs(request).returns({mediaType});
+    });
 
-            assert.calledOnce(next);
-            assert.calledWith(server.ext, 'onRequest');
+    teardown(() => {
+        sandbox.restore();
+        Negotiator.reset();
+    });
+
+    test('that the plugin is defined', () => {
+        assert.deepEqual(router.register.attributes, {
+            name: 'html-request-router'
         });
+    });
+
+    test('that a non-html request is forwarded with no modification', () => {
+        const
+            server = {ext: sinon.stub()},
+            reply = {continue: sinon.spy()},
+            next = sinon.spy();
+        server.ext.withArgs('onRequest').yields(request, reply);
+        mediaType.returns('text/foo');
+
+        router.register(server, null, next);
+
+        assert.calledOnce(next);
+        assert.calledOnce(reply.continue);
+        assert.notCalled(request.setUrl);
+    });
+
+    test('that an html request updates the route to match the html route', () => {
+        const
+            server = {ext: sinon.stub()},
+            reply = {continue: sinon.spy()},
+            next = sinon.spy();
+        server.ext.withArgs('onRequest').yields(request, reply);
+        mediaType.returns('text/html');
+
+        router.register(server, null, next);
+
+        assert.calledOnce(next);
+        assert.calledOnce(reply.continue);
+        assert.calledWith(request.setUrl, '/html');
     });
 });
