@@ -9,6 +9,9 @@
     "lint:js": "eslint .",
     "tests:unit": "mocha --recursive test/unit/",
     "test": "run-s lint:* tests:*",
+    "build": "rollup -c",
+    "preversion": "npm test",
+    "prepublish": "npm run build",
     "commitmsg": "validate-commit-msg",
     "precommit": "npm test"
   },
@@ -31,6 +34,7 @@
     "@travi/eslint-config-travi": "0.3.0",
     "babel-cli": "6.18.0",
     "babel-preset-es2015-node": "6.1.1",
+    "babel-preset-es2015-rollup": "1.2.0",
     "babel-preset-stage-2": "6.18.0",
     "chai": "3.5.0",
     "cz-conventional-changelog": "1.2.0",
@@ -39,6 +43,8 @@
     "mocha": "3.1.2",
     "npm-run-all": "3.1.1",
     "proxyquire": "1.7.10",
+    "rollup": "0.36.3",
+    "rollup-plugin-babel": "2.6.1",
     "sinon": "1.17.6",
     "validate-commit-msg": "2.8.2"
   },
