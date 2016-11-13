@@ -9,7 +9,8 @@
     "lint:js": "eslint .",
     "tests:unit": "mocha --recursive test/unit/",
     "test": "run-s lint:* tests:*",
-    "commitmsg": "validate-commit-msg"
+    "commitmsg": "validate-commit-msg",
+    "precommit": "npm test"
   },
   "repository": {
     "type": "git",
