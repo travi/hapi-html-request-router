@@ -13,3 +13,31 @@ hapi plugin to direct html requests to a single route
 ```
 $ npm install @travi/hapi-html-request-router
 ```
+
+## Usage
+
+Include this plugin in the [manifest](https://github.com/hapijs/glue) of your hapi application 
+to direct all requests for `text/html` to a ([not included](https://github.com/travi/hapi-react-router)) 
+`/html` route.
+
+```js
+export default {
+    connections: [{port: 8090}],
+    registrations: [
+        {plugin: '@travi/hapi-html-request-router'}
+    ]
+}
+```
+
+## Local Development
+
+### Install dependencies
+```
+$ nvm install
+$ npm install
+```
+
+### Verification
+```
+$ npm test
+```
