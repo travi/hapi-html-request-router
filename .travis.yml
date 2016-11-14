@@ -1,2 +1,9 @@
 language: node_js
-
+deploy:
+  provider: npm
+  email: npm@travi.org
+  api_key:
+    secure: ZVh+PUyD26J5mHCec1rCpW8Ye+Rf3sh7Wp21PsN4a9BbciPHON3uriaWj6RIUTL/tS+6I1ZWyYlzWkN9UwB3XexQ67l2fKFIYDTFkAY07DW7LQyj80H/MJ6XaRoxzmpRZplvf7lgPM8Q8yElhn4q8pvpTKzz0ZTw5ViE8d3saNn4RPhnxnz+S7jdkGpkP+aKF2oi+JwtVpt8XDZe1dsSBicoJlRQfFzTePd+swb0t6itVDMd9q8wis0PXB6dX02gL2aXyQhoCXuowgawenJ0DvrcoYXI1DDZne1vVY5Ruzpdbzz5eO32Y/ozFarKqJDnJehqlJrMovtUeSSg7Ys8Cgt7St7N/qfnQB021GANcfWQx5JzIzKDq32hCrG8N1/my7q7YC52l6RQPeCXcXN/QtWyfmXded4LR20zR1Qhe9OhZIKM8vtzVI3NCe60MVgRrP8B2SFpvxyjgOILt28A2NhSKNZEo8Vdpjf0WwaFzrvmuiYDmNYaTmNPRJ8gcVGmDYLIWs7tXifWcCPNRQPMbd1F5DjRXwbc/25kSDJvppZE6bLONwuccy48rIH4UJv6hX5VgaSB9NEIlxo9BAyPB760ljUaddweHwbpJQ19Qy8NhpMEYjA8SOAeQtv4WChgCYxL87x2eVKUZP0YvQJqU8IiSGtEVoY5yjIQ9429LP4=
+  on:
+    tags: true
+    repo: travi/hapi-html-request-router
