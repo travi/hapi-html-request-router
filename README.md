@@ -16,8 +16,8 @@ $ npm install @travi/hapi-html-request-router
 
 ## Usage
 
-Include this plugin in the [manifest](https://github.com/hapijs/glue) of your hapi application 
-to direct all requests for `text/html` to a ([not included](https://github.com/travi/hapi-react-router)) 
+Include this plugin in the [manifest](https://github.com/hapijs/glue) of your hapi application
+to direct all requests for `text/html` to a ([not included](https://github.com/travi/hapi-react-router))
 `/html` route.
 
 ```js
@@ -28,6 +28,12 @@ export default {
     ]
 }
 ```
+
+### Options
+
+#### `excludedRoutes`
+Sometimes you don't want all routes to be re-routed to the `/html` route. Provide a list of routes as strings to exclude
+them from being re-routed.
 
 ## Local Development
 

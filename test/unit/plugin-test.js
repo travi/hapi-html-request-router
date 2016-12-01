@@ -16,7 +16,7 @@ suite('plugin', () => {
         sandbox = sinon.sandbox.create();
 
         mediaType = sinon.stub();
-        request = {...any.simpleObject(), url: {path: any.url()}, setUrl: sinon.spy()};
+        request = {...any.simpleObject(), setUrl: sinon.spy()};
         Negotiator.withArgs(request).returns({mediaType});
     });
 
@@ -39,7 +39,7 @@ suite('plugin', () => {
         server.ext.withArgs('onRequest').yields(request, reply);
         mediaType.returns('text/foo');
 
-        router.register(server, null, next);
+        router.register(server, {}, next);
 
         assert.calledOnce(next);
         assert.calledOnce(reply.continue);
@@ -54,10 +54,25 @@ suite('plugin', () => {
         server.ext.withArgs('onRequest').yields(request, reply);
         mediaType.returns('text/html');
 
-        router.register(server, null, next);
+        router.register(server, {}, next);
 
         assert.calledOnce(next);
         assert.calledOnce(reply.continue);
         assert.calledWith(request.setUrl, '/html');
+    });
+
+    test('that an excluded route is not transformed', () => {
+        const
+            server = {ext: sinon.stub()},
+            reply = {continue: sinon.spy()},
+            next = sinon.spy(),
+            excludedRoute = `/${any.word()}`;
+        request.path = excludedRoute;
+        server.ext.yields(request, reply);
+        mediaType.returns('text/html');
+
+        router.register(server, {excludedRoutes: [excludedRoute]}, next);
+
+        assert.notCalled(request.setUrl);
     });
 });
