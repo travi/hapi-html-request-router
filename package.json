@@ -47,7 +47,7 @@
     "npm-run-all": "3.1.2",
     "proxyquire": "1.7.10",
     "rollup": "0.36.4",
-    "rollup-plugin-babel": "2.6.1",
+    "rollup-plugin-babel": "2.7.0",
     "semantic-release": "6.3.2",
     "sinon": "1.17.6",
     "validate-commit-msg": "2.8.2"
