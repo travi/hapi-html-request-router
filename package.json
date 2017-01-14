@@ -46,7 +46,7 @@
     "mocha": "3.2.0",
     "npm-run-all": "4.0.0",
     "proxyquire": "1.7.10",
-    "rollup": "0.41.1",
+    "rollup": "0.41.3",
     "rollup-plugin-babel": "2.7.1",
     "semantic-release": "6.3.2",
     "sinon": "1.17.7",
