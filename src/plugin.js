@@ -6,17 +6,23 @@ function htmlWasRequested(request) {
     return 'text/html' === negotiator.mediaType();
 }
 
-function pathShouldNotBeExcluded(options, request) {
-    if (options.excludedRoutes) {
-        return !options.excludedRoutes.includes(request.path);
+function pathShouldNotBeExcluded(excludedRoutes, path) {
+    if (excludedRoutes) {
+        return !excludedRoutes.includes(path);
     }
 
     return true;
 }
 
+function isGetRequestForHtml(request, excludedRoutes) {
+    const {method, path} = request;
+
+    return 'get' === method && htmlWasRequested(request) && pathShouldNotBeExcluded(excludedRoutes, path);
+}
+
 export function register(server, options, next) {
     server.ext('onRequest', (request, reply) => {
-        if (htmlWasRequested(request) && pathShouldNotBeExcluded(options, request)) {
+        if (isGetRequestForHtml(request, options.excludedRoutes)) {
             request.setUrl('/html');
         }
 

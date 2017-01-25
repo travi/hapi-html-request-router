@@ -16,7 +16,7 @@ suite('plugin', () => {
         sandbox = sinon.sandbox.create();
 
         mediaType = sinon.stub();
-        request = {...any.simpleObject(), setUrl: sinon.spy()};
+        request = {...any.simpleObject(), setUrl: sinon.spy(), method: 'get'};
         Negotiator.withArgs(request).returns({mediaType});
     });
 
@@ -72,6 +72,20 @@ suite('plugin', () => {
         mediaType.returns('text/html');
 
         router.register(server, {excludedRoutes: [excludedRoute]}, next);
+
+        assert.notCalled(request.setUrl);
+    });
+
+    test('that verbs other than GET are not transformed', () => {
+        const
+            next = sinon.spy(),
+            reply = {continue: sinon.spy()},
+            server = {ext: sinon.stub()};
+        request.method = any.word();
+        mediaType.returns('text/html');
+        server.ext.yields(request, reply);
+
+        router.register(server, {}, next);
 
         assert.notCalled(request.setUrl);
     });
