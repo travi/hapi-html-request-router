@@ -4,89 +4,84 @@ import proxyquire from 'proxyquire';
 import any from '@travi/any';
 
 suite('plugin', () => {
-    let sandbox, mediaType, request;
+  let sandbox, mediaType, request;
 
-    const
-        Negotiator = sinon.stub(),
-        router = proxyquire('../../src/plugin', {
-            'negotiator': Negotiator
-        });
+  const Negotiator = sinon.stub();
+  const router = proxyquire('../../src/plugin', {
+    negotiator: Negotiator
+  });
 
-    setup(() => {
-        sandbox = sinon.sandbox.create();
+  setup(() => {
+    sandbox = sinon.sandbox.create();
 
-        mediaType = sinon.stub();
-        request = {...any.simpleObject(), setUrl: sinon.spy(), method: 'get'};
-        Negotiator.withArgs(request).returns({mediaType});
+    mediaType = sinon.stub();
+    request = {...any.simpleObject(), setUrl: sinon.spy(), method: 'get'};
+    Negotiator.withArgs(request).returns({mediaType});
+  });
+
+  teardown(() => {
+    sandbox.restore();
+    Negotiator.reset();
+  });
+
+  test('that the plugin is defined', () => {
+    assert.deepEqual(router.register.attributes, {
+      name: 'html-request-router'
     });
+  });
 
-    teardown(() => {
-        sandbox.restore();
-        Negotiator.reset();
-    });
+  test('that a non-html request is forwarded with no modification', () => {
+    const server = {ext: sinon.stub()};
+    const reply = {continue: sinon.spy()};
+    const next = sinon.spy();
+    server.ext.withArgs('onRequest').yields(request, reply);
+    mediaType.returns('text/foo');
 
-    test('that the plugin is defined', () => {
-        assert.deepEqual(router.register.attributes, {
-            name: 'html-request-router'
-        });
-    });
+    router.register(server, {}, next);
 
-    test('that a non-html request is forwarded with no modification', () => {
-        const
-            server = {ext: sinon.stub()},
-            reply = {continue: sinon.spy()},
-            next = sinon.spy();
-        server.ext.withArgs('onRequest').yields(request, reply);
-        mediaType.returns('text/foo');
+    assert.calledOnce(next);
+    assert.calledOnce(reply.continue);
+    assert.notCalled(request.setUrl);
+  });
 
-        router.register(server, {}, next);
+  test('that an html request updates the route to match the html route', () => {
+    const server = {ext: sinon.stub()};
+    const reply = {continue: sinon.spy()};
+    const next = sinon.spy();
+    server.ext.withArgs('onRequest').yields(request, reply);
+    mediaType.returns('text/html');
 
-        assert.calledOnce(next);
-        assert.calledOnce(reply.continue);
-        assert.notCalled(request.setUrl);
-    });
+    router.register(server, {}, next);
 
-    test('that an html request updates the route to match the html route', () => {
-        const
-            server = {ext: sinon.stub()},
-            reply = {continue: sinon.spy()},
-            next = sinon.spy();
-        server.ext.withArgs('onRequest').yields(request, reply);
-        mediaType.returns('text/html');
+    assert.calledOnce(next);
+    assert.calledOnce(reply.continue);
+    assert.calledWith(request.setUrl, '/html');
+  });
 
-        router.register(server, {}, next);
+  test('that an excluded route is not transformed', () => {
+    const server = {ext: sinon.stub()};
+    const reply = {continue: sinon.spy()};
+    const next = sinon.spy();
+    const excludedRoute = `/${any.word()}`;
+    request.path = excludedRoute;
+    server.ext.yields(request, reply);
+    mediaType.returns('text/html');
 
-        assert.calledOnce(next);
-        assert.calledOnce(reply.continue);
-        assert.calledWith(request.setUrl, '/html');
-    });
+    router.register(server, {excludedRoutes: [excludedRoute]}, next);
 
-    test('that an excluded route is not transformed', () => {
-        const
-            server = {ext: sinon.stub()},
-            reply = {continue: sinon.spy()},
-            next = sinon.spy(),
-            excludedRoute = `/${any.word()}`;
-        request.path = excludedRoute;
-        server.ext.yields(request, reply);
-        mediaType.returns('text/html');
+    assert.notCalled(request.setUrl);
+  });
 
-        router.register(server, {excludedRoutes: [excludedRoute]}, next);
+  test('that verbs other than GET are not transformed', () => {
+    const next = sinon.spy();
+    const reply = {continue: sinon.spy()};
+    const server = {ext: sinon.stub()};
+    request.method = any.word();
+    mediaType.returns('text/html');
+    server.ext.yields(request, reply);
 
-        assert.notCalled(request.setUrl);
-    });
+    router.register(server, {}, next);
 
-    test('that verbs other than GET are not transformed', () => {
-        const
-            next = sinon.spy(),
-            reply = {continue: sinon.spy()},
-            server = {ext: sinon.stub()};
-        request.method = any.word();
-        mediaType.returns('text/html');
-        server.ext.yields(request, reply);
-
-        router.register(server, {}, next);
-
-        assert.notCalled(request.setUrl);
-    });
+    assert.notCalled(request.setUrl);
+  });
 });
