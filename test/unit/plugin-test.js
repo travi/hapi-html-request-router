@@ -5,6 +5,9 @@ import any from '@travi/any';
 
 suite('plugin', () => {
   let sandbox, mediaType, request;
+  const server = {};
+  const reply = {};
+  const next = sinon.spy();
 
   const Negotiator = sinon.stub();
   const router = proxyquire('../../src/plugin', {
@@ -14,6 +17,9 @@ suite('plugin', () => {
   setup(() => {
     sandbox = sinon.sandbox.create();
 
+    server.ext = sinon.stub();
+    reply.continue = sinon.spy();
+
     mediaType = sinon.stub();
     request = {...any.simpleObject(), setUrl: sinon.spy(), method: 'get'};
     Negotiator.withArgs(request).returns({mediaType});
@@ -22,6 +28,7 @@ suite('plugin', () => {
   teardown(() => {
     sandbox.restore();
     Negotiator.reset();
+    next.reset();
   });
 
   test('that the plugin is defined', () => {
@@ -31,9 +38,6 @@ suite('plugin', () => {
   });
 
   test('that a non-html request is forwarded with no modification', () => {
-    const server = {ext: sinon.stub()};
-    const reply = {continue: sinon.spy()};
-    const next = sinon.spy();
     server.ext.withArgs('onRequest').yields(request, reply);
     mediaType.returns('text/foo');
 
@@ -45,9 +49,6 @@ suite('plugin', () => {
   });
 
   test('that an html request updates the route to match the html route', () => {
-    const server = {ext: sinon.stub()};
-    const reply = {continue: sinon.spy()};
-    const next = sinon.spy();
     server.ext.withArgs('onRequest').yields(request, reply);
     mediaType.returns('text/html');
 
@@ -59,9 +60,6 @@ suite('plugin', () => {
   });
 
   test('that an excluded route is not transformed', () => {
-    const server = {ext: sinon.stub()};
-    const reply = {continue: sinon.spy()};
-    const next = sinon.spy();
     const excludedRoute = `/${any.word()}`;
     request.path = excludedRoute;
     server.ext.yields(request, reply);
@@ -73,9 +71,6 @@ suite('plugin', () => {
   });
 
   test('that verbs other than GET are not transformed', () => {
-    const next = sinon.spy();
-    const reply = {continue: sinon.spy()};
-    const server = {ext: sinon.stub()};
     request.method = any.word();
     mediaType.returns('text/html');
     server.ext.yields(request, reply);
