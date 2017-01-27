@@ -1,6 +1,12 @@
 import Negotiator from 'negotiator';
 
 function htmlWasRequested(request) {
+  if (request.path.includes('.')) {
+    const [, extension] = request.path.split('.');
+
+    return 'html' === extension;
+  }
+
   const negotiator = new Negotiator(request);
 
   return 'text/html' === negotiator.mediaType();

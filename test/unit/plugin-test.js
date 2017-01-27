@@ -21,8 +21,10 @@ suite('plugin', () => {
     reply.continue = sinon.spy();
 
     mediaType = sinon.stub();
-    request = {...any.simpleObject(), setUrl: sinon.spy(), method: 'get'};
+    request = {...any.simpleObject(), setUrl: sinon.spy(), method: 'get', path: any.word()};
     Negotiator.withArgs(request).returns({mediaType});
+
+    server.ext.withArgs('onRequest').yields(request, reply);
   });
 
   teardown(() => {
@@ -38,7 +40,6 @@ suite('plugin', () => {
   });
 
   test('that a non-html request is forwarded with no modification', () => {
-    server.ext.withArgs('onRequest').yields(request, reply);
     mediaType.returns('text/foo');
 
     router.register(server, {}, next);
@@ -49,7 +50,6 @@ suite('plugin', () => {
   });
 
   test('that an html request updates the route to match the html route', () => {
-    server.ext.withArgs('onRequest').yields(request, reply);
     mediaType.returns('text/html');
 
     router.register(server, {}, next);
@@ -59,10 +59,27 @@ suite('plugin', () => {
     assert.calledWith(request.setUrl, '/html');
   });
 
+  test('that a file extension at the end of the uri takes precedence over the accept header', () => {
+    mediaType.returns('text/html');
+    request.path = `/${any.word()}.${any.word()}`;
+
+    router.register(server, {}, next);
+
+    assert.notCalled(request.setUrl);
+  });
+
+  test('that a file extension of `.html` resolves to html', () => {
+    mediaType.returns('text/html');
+    request.path = `/${any.word()}.html`;
+
+    router.register(server, {}, next);
+
+    assert.calledWith(request.setUrl, '/html');
+  });
+
   test('that an excluded route is not transformed', () => {
     const excludedRoute = `/${any.word()}`;
     request.path = excludedRoute;
-    server.ext.yields(request, reply);
     mediaType.returns('text/html');
 
     router.register(server, {excludedRoutes: [excludedRoute]}, next);
@@ -73,7 +90,6 @@ suite('plugin', () => {
   test('that verbs other than GET are not transformed', () => {
     request.method = any.word();
     mediaType.returns('text/html');
-    server.ext.yields(request, reply);
 
     router.register(server, {}, next);
 
