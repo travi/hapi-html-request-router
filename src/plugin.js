@@ -33,5 +33,5 @@ export function register(server, options, next) {
 }
 
 register.attributes = {
-  name: 'html-request-router'
+  pkg: require('../package.json')
 };

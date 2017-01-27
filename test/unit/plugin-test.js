@@ -26,7 +26,7 @@ suite('plugin', () => {
 
   test('that the plugin is defined', () => {
     assert.deepEqual(router.register.attributes, {
-      name: 'html-request-router'
+      pkg: require('../../package.json')
     });
   });
 
