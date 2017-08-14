@@ -13,7 +13,6 @@
     "preversion": "npm test",
     "commitmsg": "validate-commit-msg",
     "precommit": "npm test",
-    "postpublish": "greenkeeper-postpublish",
     "presemantic-release": "npm run build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
