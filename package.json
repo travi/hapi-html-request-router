@@ -11,7 +11,7 @@
     "test": "run-s lint:* tests:*",
     "build": "rollup -c",
     "preversion": "npm test",
-    "commitmsg": "validate-commit-msg",
+    "commitmsg": "commitlint -e",
     "precommit": "npm test",
     "presemantic-release": "npm run build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
@@ -31,6 +31,8 @@
   },
   "homepage": "https://github.com/travi/hapi-html-request-router#readme",
   "devDependencies": {
+    "@commitlint/cli": "3.1.2",
+    "@commitlint/config-angular": "3.1.1",
     "@travi/any": "1.4.0",
     "@travi/eslint-config-travi": "1.3.9",
     "babel-cli": "6.24.1",
@@ -47,8 +49,7 @@
     "rollup": "0.47.4",
     "rollup-plugin-babel": "3.0.1",
     "semantic-release": "6.3.6",
-    "sinon": "3.2.0",
-    "validate-commit-msg": "2.14.0"
+    "sinon": "3.2.0"
   },
   "config": {
     "commitizen": {
