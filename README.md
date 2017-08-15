@@ -1,5 +1,7 @@
 # hapi-html-request-router
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/travi/hapi-html-request-router.svg)](https://greenkeeper.io/)
+
 hapi plugin to direct html requests to a single route
 
 [![npm](https://img.shields.io/npm/v/@travi/hapi-html-request-router.svg?maxAge=2592000)](https://www.npmjs.com/package/@travi/hapi-html-request-router)
