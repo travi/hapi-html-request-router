@@ -34,7 +34,7 @@
     "@commitlint/cli": "3.1.2",
     "@commitlint/config-angular": "3.1.1",
     "@travi/any": "1.4.0",
-    "@travi/eslint-config-travi": "1.3.9",
+    "@travi/eslint-config-travi": "1.4.0",
     "babel-cli": "6.24.1",
     "babel-preset-es2015-node": "6.1.1",
     "babel-preset-es2015-rollup": "3.0.0",
