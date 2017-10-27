@@ -12,9 +12,13 @@ function htmlWasRequested(request) {
   return 'text/html' === negotiator.mediaType();
 }
 
+function findMatchedRoutes(excludedRoutes, path) {
+  return excludedRoutes.map(route => path.match(route)).filter(Boolean);
+}
+
 function pathShouldNotBeExcluded(excludedRoutes, path) {
   if (excludedRoutes) {
-    return !excludedRoutes.includes(path);
+    return 0 === findMatchedRoutes(excludedRoutes, path).length;
   }
 
   return true;
