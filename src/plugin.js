@@ -13,8 +13,9 @@ function htmlWasRequested(request) {
 }
 
 function pathShouldNotBeExcluded(excludedRoutes, path) {
+  const pathWithoutTrailingSlash = path.slice(-1) === '/' ? path.slice(0, -1) : path;
   if (excludedRoutes) {
-    return !excludedRoutes.includes(path);
+    return !excludedRoutes.includes(pathWithoutTrailingSlash);
   }
 
   return true;
