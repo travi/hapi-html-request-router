@@ -1,6 +1,8 @@
 language: node_js
 after_install: npm ls >/dev/null
 after_success: npm run semantic-release
+before_script: npm run greenkeeper:update-lockfile
+after_script: npm run greenkeeper:upload-lockfile
 branches:
   except:
     - "/^v\\d+\\.\\d+\\.\\d+$/"
