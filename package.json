@@ -33,25 +33,25 @@
   },
   "homepage": "https://github.com/travi/hapi-html-request-router#readme",
   "devDependencies": {
-    "@commitlint/cli": "5.2.8",
-    "@commitlint/config-angular": "5.1.1",
+    "@commitlint/cli": "6.0.1",
     "@travi/any": "1.6.0",
-    "@travi/eslint-config-travi": "1.5.11",
+    "@travi/eslint-config-travi": "1.6.2",
     "babel-cli": "6.26.0",
     "babel-preset-es2015-node": "6.1.1",
     "babel-preset-es2015-rollup": "3.0.0",
     "babel-preset-stage-2": "6.24.1",
     "chai": "4.1.2",
+    "commitlint-config-travi": "1.2.19",
     "cz-conventional-changelog": "2.1.0",
     "greenkeeper-lockfile": "1.12.0",
     "husky": "0.14.3",
     "mocha": "4.1.0",
     "npm-run-all": "4.1.2",
     "proxyquire": "1.8.0",
-    "rollup": "0.48.2",
+    "rollup": "0.53.4",
     "rollup-plugin-babel": "3.0.3",
-    "semantic-release": "8.0.0",
-    "sinon": "3.2.1"
+    "semantic-release": "11.0.2",
+    "sinon": "4.1.4"
   },
   "config": {
     "commitizen": {
