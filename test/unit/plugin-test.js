@@ -87,8 +87,18 @@ suite('plugin', () => {
     assert.notCalled(request.setUrl);
   });
 
-  test('that routes can be excluded by regex', () => {
+  test('that routes can be excluded by a regex string', () => {
     const excludedRoute = '/foo/*';
+    request.path = '/foo/bar/baz';
+    mediaType.returns('text/html');
+
+    router.register(server, {excludedRoutes: [excludedRoute]}, next);
+
+    assert.notCalled(request.setUrl);
+  });
+
+  test('that routes can be excluded by a regex pattern', () => {
+    const excludedRoute = /\/foo\/.*/;
     request.path = '/foo/bar/baz';
     mediaType.returns('text/html');
 

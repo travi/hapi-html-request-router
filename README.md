@@ -34,8 +34,27 @@ export default {
 ### Options
 
 #### `excludedRoutes`
-Sometimes you don't want all routes to be re-routed to the `/html` route. Provide a list of routes as strings to exclude
+Sometimes you don't want all routes to be re-routed to the `/html` route. Provide a list of routes as strings or regex patterns to exclude
 them from being re-routed.
+
+```js
+export default {
+    connections: [{port: 8090}],
+    registrations: [
+        {
+          plugin: {
+            register: '@travi/hapi-html-request-router',
+            options: [
+              '/login',
+              '/logout',
+              '/foo/*',
+              /\/bar\/.*/
+            ]
+          }
+        }
+    ]
+}
+```
 
 ## Local Development
 
