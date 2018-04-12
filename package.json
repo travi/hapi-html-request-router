@@ -52,7 +52,7 @@
     "proxyquire": "2.0.1",
     "rollup": "0.57.1",
     "rollup-plugin-babel": "3.0.3",
-    "semantic-release": "15.1.6",
+    "semantic-release": "15.1.7",
     "sinon": "4.1.5"
   },
   "config": {
