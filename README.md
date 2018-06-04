@@ -1,22 +1,21 @@
 # hapi-html-request-router
 
-hapi plugin to direct html requests to a single route
+[hapi](https://hapijs.com) plugin to direct html requests to a single route
+
+[![Build Status](https://img.shields.io/travis/travi/hapi-html-request-router.svg?style=flat)](https://travis-ci.org/travi/hapi-html-request-router)
+
+## Usage
 
 [![npm](https://img.shields.io/npm/v/@travi/hapi-html-request-router.svg?maxAge=2592000)](https://www.npmjs.com/package/@travi/hapi-html-request-router)
 [![license](https://img.shields.io/github/license/travi/hapi-html-request-router.svg)](LICENSE)
-[![Build Status](https://img.shields.io/travis/travi/hapi-html-request-router.svg?style=flat)](https://travis-ci.org/travi/hapi-html-request-router)
 
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![Greenkeeper badge](https://badges.greenkeeper.io/travi/hapi-html-request-router.svg)](https://greenkeeper.io/)
-
-## Installation
+### Installation
 
 ```sh
 $ npm install @travi/hapi-html-request-router
 ```
 
-## Usage
+### Register with your [Hapi](https://hapijs.com) v17 server
 
 Include this plugin in the [manifest](https://github.com/hapijs/glue) of your
 hapi application to direct all requests for `text/html` to a
@@ -24,10 +23,12 @@ hapi application to direct all requests for `text/html` to a
 
 ```js
 export default {
-    connections: [{port: 8090}],
-    registrations: [
+    server: {port: process.env.PORT},
+    register: {
+      plugins: [
         {plugin: '@travi/hapi-html-request-router'}
-    ]
+      ]
+    }
 }
 ```
 
@@ -41,24 +42,28 @@ being re-routed.
 
 ```js
 export default {
-    connections: [{port: 8090}],
-    registrations: [
+    server: {port: process.env.PORT},
+    register: {
+      plugins: [
         {
-          plugin: {
-            register: '@travi/hapi-html-request-router',
-            options: [
-              '/login',
-              '/logout',
-              '/foo/*',
-              /\/bar\/.*/
-            ]
-          }
+          plugin: '@travi/hapi-html-request-router',
+          options: [
+            '/login',
+            '/logout',
+            '/foo/*',
+            /\/bar\/.*/
+          ]
         }
-    ]
+      ]
+    }
 }
 ```
 
-## Local Development
+## Contribution
+
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![Greenkeeper badge](https://badges.greenkeeper.io/travi/hapi-html-request-router.svg)](https://greenkeeper.io/)
 
 ### Install dependencies
 

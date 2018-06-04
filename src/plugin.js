@@ -30,18 +30,15 @@ function isGetRequestForHtml(request, excludedRoutes) {
   return 'get' === method && htmlWasRequested(request) && pathShouldNotBeExcluded(excludedRoutes, path);
 }
 
-export function register(server, options, next) {
-  server.ext('onRequest', (request, reply) => {
-    if (isGetRequestForHtml(request, options.excludedRoutes)) {
-      request.setUrl('/html');
-    }
+export const plugin = {
+  pkg: require('../package.json'),
+  async register(server, options) {
+    server.ext('onRequest', (request, h) => {
+      if (isGetRequestForHtml(request, options.excludedRoutes)) {
+        request.setUrl('/html');
+      }
 
-    reply.continue();
-  });
-
-  next();
-}
-
-register.attributes = {
-  pkg: require('../package.json')
+      return h.continue;
+    });
+  }
 };
