@@ -14,8 +14,7 @@
     "preversion": "npm test",
     "commitmsg": "commitlint -e",
     "precommit": "npm test",
-    "presemantic-release": "npm run build",
-    "semantic-release": "semantic-release",
+    "prepublishOnly": "npm run build",
     "greenkeeper:update-lockfile": "greenkeeper-lockfile-update",
     "greenkeeper:upload-lockfile": "greenkeeper-lockfile-upload"
   },
