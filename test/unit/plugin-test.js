@@ -15,7 +15,7 @@ suite('plugin', () => {
   });
 
   setup(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
 
     server.ext = sinon.stub();
     reply.continue = sinon.spy();
@@ -29,8 +29,8 @@ suite('plugin', () => {
 
   teardown(() => {
     sandbox.restore();
-    Negotiator.reset();
-    next.reset();
+    Negotiator.resetHistory();
+    next.resetHistory();
   });
 
   test('that the plugin is defined', () => {
