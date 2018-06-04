@@ -1,9 +1,7 @@
 language: node_js
 after_install: npm ls >/dev/null
 before_script: npm run greenkeeper:update-lockfile
-script:
-- npm test
-- npm run semantic-release
+script: npm test
 after_script: npm run greenkeeper:upload-lockfile
 branches:
   except:
