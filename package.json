@@ -54,7 +54,7 @@
     "proxyquire": "2.0.1",
     "rollup": "0.60.1",
     "rollup-plugin-babel": "3.0.4",
-    "sinon": "^5.0.10"
+    "sinon": "^6.0.0"
   },
   "config": {
     "commitizen": {
