@@ -8,7 +8,7 @@ export default {
     babel({
       babelrc: false,
       exclude: ['./node_modules/**'],
-      presets: ['es2015-rollup']
+      presets: [['@travi', {targets: {node: 8}, modules: false}]]
     })
   ],
   output: [
