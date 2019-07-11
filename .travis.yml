@@ -1,8 +1,5 @@
 language: node_js
 after_install: npm ls >/dev/null
-before_script: npm run greenkeeper:update-lockfile
-script: npm test
-after_script: npm run greenkeeper:upload-lockfile
 branches:
   except:
     - "/^v\\d+\\.\\d+\\.\\d+$/"
@@ -14,5 +11,4 @@ env:
   global:
   - FORCE_COLOR=1
   - NPM_CONFIG_COLOR=always
-  - GK_LOCK_COMMIT_AMEND=true
   - secure: bWijZs3TM3HS8MDRfNZRO2YTM5AvDnMnNXcKLrk3tMMLV1zzRkFC47bBIVue1QaF0UUaWY+fT5Dfxo5/A2TOcPb7U9Jm0f6SoAZ8vmGmkF1rQnXoV3+ykd6kFjhm8O/nCFRlcF83DvarCON+1xPTPG0kuytNTj9t5lyjJsqunhL8qM5nVfPpnS+KrsMWKbDlQ/ruhwCG+Iarc2CbgWv0HQtBDL6pyA810OSj187VlZHfdlDQ5/t26dBZTK/22t+jcjuF/YpfFDo5nVUXt8/6HnwOBpaIShwJbLF/4QKJAqilaQXpaSXKMZmz5vTBUpXwLt2MEYu0tgNzu+T/WWI3O0R5LlDqcGpofuYLoibmhMmKeSslrZDL3A3penGX1Me2dZP2IgWh/sfz0Cdjove8AhvzSLJR4TGIiWECiAZiAFGLxogxD3QRYvXWwzvcufCOvixNep4Dbr4XVntsRGhukO+XPcjXqQrAnTxPkcPC52QLafV9F04I8NeUGhwkLJzBtOjvVvsXQDkYPUAp+M4eUTkQeUjXG4Jy2nuZ67C3LOvehER4bBCFj9AerMLANQl63AUyTBnYhAdYDmsf/cTEocNbd9g6xFvjKm6pLRjBNj41lskcndevGAfsg4whRLnDjZCr7IOr7PZyFTeom4ATpz0wDHO6xJMwSABabDTjO7o=

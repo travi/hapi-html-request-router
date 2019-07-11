@@ -14,9 +14,7 @@
     "preversion": "npm test",
     "commitmsg": "commitlint -e",
     "precommit": "npm test",
-    "prepublishOnly": "npm run build",
-    "greenkeeper:update-lockfile": "greenkeeper-lockfile-update",
-    "greenkeeper:upload-lockfile": "greenkeeper-lockfile-upload"
+    "prepack": "npm run build"
   },
   "repository": {
     "type": "git",
