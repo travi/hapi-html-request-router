@@ -1,5 +1,5 @@
 language: node_js
-after_install: npm ls >/dev/null
+before-script: npm ls >/dev/null
 branches:
   except:
     - "/^v\\d+\\.\\d+\\.\\d+$/"
