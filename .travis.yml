@@ -2,4 +2,3 @@ version: ~> 1.0
 import:
   - form8ion/.travis-ci:node.yml
   - travi/.travis-ci:authenticated-semantic-release.yml
-before-script: npm ls >/dev/null

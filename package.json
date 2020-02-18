@@ -8,6 +8,7 @@
   "scripts": {
     "lint:md": "markdownlint *.md",
     "lint:js": "eslint .",
+    "lint:peer": "npm ls >/dev/null",
     "tests:unit": "mocha --recursive test/unit/",
     "test": "run-s lint:* tests:*",
     "build": "rollup -c",
@@ -59,7 +60,7 @@
     }
   },
   "peerDependencies": {
-    "@hapi/hapi": "^18.0.0"
+    "@hapi/hapi": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
     "negotiator": "0.6.2"
