@@ -2,7 +2,7 @@
 
 [hapi](https://hapijs.com) plugin to direct html requests to a single route
 
-[![Build Status](https://img.shields.io/travis/travi/hapi-html-request-router.svg?style=flat)](https://travis-ci.org/travi/hapi-html-request-router)
+[![Build Status](https://img.shields.io/travis/com/travi/hapi-html-request-router.svg?style=flat)](https://travis-ci.com/travi/hapi-html-request-router)
 
 ## Usage
 
