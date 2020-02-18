@@ -1,13 +1,5 @@
-language: node_js
+version: ~> 1.0
+import:
+  - form8ion/.travis-ci:node.yml
+  - travi/.travis-ci:authenticated-semantic-release.yml
 before-script: npm ls >/dev/null
-branches:
-  except:
-    - "/^v\\d+\\.\\d+\\.\\d+$/"
-deploy:
-  provider: script
-  skip_cleanup: true
-  script: npx semantic-release
-env:
-  global:
-  - FORCE_COLOR=1
-  - NPM_CONFIG_COLOR=always
