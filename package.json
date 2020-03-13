@@ -13,8 +13,6 @@
     "test": "run-s lint:* tests:*",
     "build": "rollup -c",
     "preversion": "npm test",
-    "commitmsg": "commitlint -e",
-    "precommit": "npm test",
     "prepack": "npm run build"
   },
   "repository": {
