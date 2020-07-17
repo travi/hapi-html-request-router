@@ -35,7 +35,7 @@
   "devDependencies": {
     "@babel/register": "7.10.5",
     "@commitlint/cli": "9.1.1",
-    "@hapi/hapi": "19.1.1",
+    "@hapi/hapi": "19.2.0",
     "@travi/any": "2.0.10",
     "@travi/babel-preset": "3.0.25",
     "@travi/eslint-config-travi": "1.8.8",
