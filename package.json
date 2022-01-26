@@ -39,7 +39,7 @@
     "@travi/any": "2.0.19",
     "@travi/babel-preset": "3.0.75",
     "@travi/eslint-config-travi": "1.8.8",
-    "chai": "4.3.5",
+    "chai": "4.3.6",
     "commitlint-config-travi": "1.4.8",
     "cz-conventional-changelog": "3.3.0",
     "greenkeeper-lockfile": "1.15.1",
