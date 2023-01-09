@@ -34,7 +34,7 @@
   "homepage": "https://github.com/travi/hapi-html-request-router#readme",
   "devDependencies": {
     "@babel/register": "7.18.9",
-    "@commitlint/cli": "17.4.0",
+    "@commitlint/cli": "17.4.1",
     "@hapi/hapi": "21.1.0",
     "@travi/any": "2.1.6",
     "@travi/babel-preset": "3.0.96",
