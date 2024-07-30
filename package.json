@@ -37,7 +37,7 @@
     "@commitlint/cli": "19.3.0",
     "@hapi/hapi": "21.3.10",
     "@travi/any": "3.1.2",
-    "@travi/babel-preset": "3.0.128",
+    "@travi/babel-preset": "3.0.129",
     "@travi/eslint-config-travi": "1.8.8",
     "chai": "5.1.1",
     "commitlint-config-travi": "1.4.50",
