@@ -40,7 +40,7 @@
     "@travi/babel-preset": "3.0.140",
     "@travi/eslint-config-travi": "1.8.8",
     "chai": "5.2.0",
-    "commitlint-config-travi": "1.4.56",
+    "commitlint-config-travi": "1.4.57",
     "cz-conventional-changelog": "3.3.0",
     "greenkeeper-lockfile": "1.15.1",
     "husky": "9.1.7",
